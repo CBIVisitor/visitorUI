@@ -1,0 +1,272 @@
+ <div class="row">
+   <div class="col-12">
+     <div class="card card-body">
+       <h4 class="card-title">جدول الزائرين</h4>
+       <h5 class="card-subtitle">قائمة باسماء زائرين البنك المركزي العراقي</h5>
+       <div class="d-flex mb-3 mt-3">
+         <input type="text" class="form-control w-25" placeholder="البحث عن طريق الاسم" [(ngModel)]='searchTerm'>
+         <button class="btn btn-primary ms-auto" (click)="openModal(editvisitorModal, null)">إضافة زائر</button>
+       </div>
+       <div class="table-responsive table-bordered" *ngIf="filterArray.length>0">
+         <table class="table table-striped mb-0 no-wrap align-middle">
+           <thead>
+             <tr>
+               <th class="text-center" scope="col">#</th>
+               <th scope="col">الاسم</th>
+               <th scope="col">تاريخ الزيارة</th>
+               <th scope="col">نوع الزائر</th>
+               <th scope="col">الجهة المستضيفة</th>
+               <th scope="col">البوابة</th>
+               <th scope="col"></th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr
+               *ngFor="let visitor of filterArray| slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ;let i = index ">
+
+               <td class="text-center">
+                 {{i + 1}}
+               </td>
+               <td>
+                 <div class="d-flex align-items-center">
+                   <img class="rounded-circle" src='/assets/images/users/{{visitor?.Gender?.id}}.jpg' height=" 25px"
+                     width="25px">
+                   <div class="ms-3">
+                     <p class="font-medium mb-0">{{ visitor.fullname}}</p>
+                     <small>{{visitor.Position}}</small>
+                   </div>
+                 </div>
+               </td>
+               <td>{{ visitor.fromDate | date:'longDate' }}</td>
+               <td>{{ visitor.Profile?.bio }}</td>
+               <td>{{ visitor.h_Name   }}</td>
+               <td>{{ visitor.Door?.name }}</td>
+               <td>
+                 <a hidden href="javascript: void(0);" (click)="openModal(editvisitorModal, visitor)" class="link me-2"
+                   placement="top" ngbTooltip="تعديل">
+                   <!-- <i class="far fa-edit"></i> -->
+                   <i-feather name="edit-2" class="feather-sm"></i-feather>
+                 </a>
+                 <a href="javascript: void(0);" class="link" (click)="deletevisitor(visitor.id)" placement="top"
+                   ngbTooltip="حذف">
+                   <i-feather name="trash-2" class="feather-sm"></i-feather>
+                 </a>
+               </td>
+             </tr>
+           </tbody>
+         </table>
+       </div>
+       <div class="d-flex justify-content-center mt-5" *ngIf="filterArray.length>0">
+         <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="filterArray.length"></ngb-pagination>
+       </div>
+
+       <div class="d-flex justify-content-center mt-5" *ngIf="filterArray.length==0">
+         <h3>لا توجد بيانات</h3>
+       </div>
+     </div>
+   </div>
+ </div>
+
+
+ <ng-template #editvisitorModal let-modal>
+
+   <div class="modal-header">
+
+     <h5 class="modal-title" id="editvisitorLabel">معلومات الزائر</h5>
+
+     <button type="button" class="close" (click)="closeBtnClick()" aria-label="غلق"> غلق
+     </button>
+
+   </div>
+
+   <div class="modal-body">
+
+     <form [formGroup]="editvisitor" (ngSubmit)="onSubmit()">
+
+       <div class="mb-3 row">
+         <label for="fullname" class="col-sm-4 col-form-label"> الاسم الكامل</label>
+         <div class="col-sm-8">
+           <input type="text" class="form-control" formControlName="fullname" id="fullname"
+             (blur)=logValidationErrors(editvisitor)>
+           <span class="help-block" *ngIf="formsErrors.fullname">
+             {{formsErrors.fullname}}
+           </span>
+         </div>
+       </div>
+
+
+       <div class="mb-3 row">
+         <label for="Profile" class="col-sm-4 col-form-label">نوع الزائر</label>
+         <div class="col-sm-8">
+           <select formControlName="Profile" [ngModel]="selectedProfile" (change)="onChangeObj($event.target.value)"
+             class="form-control">
+             <option [ngValue]="null" disabled> اختر </option>
+             <option *ngFor="let profile of profiles" [ngValue]="profile.id" [value]="profile.id">{{profile.bio}}
+             </option>
+           </select>
+         </div>
+       </div>
+
+       <div class="mb-3 row">
+         <label for="Door" class="col-sm-4 col-form-label">البوابة</label>
+         <div class="col-sm-8">
+           <select formControlName="Door" class="form-control">
+             <option [ngValue]="null" disabled>اختر</option>
+             <option *ngFor="let door of doors" [ngValue]="door.id">{{door.name}}</option>
+           </select>
+         </div>
+       </div>
+       <div class="mb-3 row">
+         <label for="Gender" class="col-sm-4 col-form-label">الجنس</label>
+         <div class="col-sm-8">
+           <select formControlName="Gender" class="form-control">
+             <option [ngValue]="null" disabled>اختر</option>
+             <option *ngFor="let gender of genders" [ngValue]="gender.id">{{gender.name}}</option>
+           </select>
+         </div>
+       </div>
+       <div class="mb-3 row" *ngIf="Visibles.Event">
+         <label for="Event" class="col-sm-4 col-form-label">الدورة</label>
+         <div class="col-sm-8">
+           <select formControlName="Event" class="form-control">
+             <option [ngValue]="null" disabled>اختر</option>
+             <option *ngFor="let event of events" [ngValue]="event.id">{{event.name}}</option>
+           </select>
+         </div>
+       </div>
+       <div class="mb-3 row" *ngIf="Visibles.email">
+         <label for="email" class="col-sm-4 col-form-label">البريد الالكتروني</label>
+         <div class="col-sm-8">
+           <input type="email" class="form-control" formControlName="email" id="email"
+             (blur)=logValidationErrors(editvisitor)>
+           <span class="help-block" *ngIf="formsErrors.email">
+             {{formsErrors.email}}
+           </span>
+         </div>
+       </div>
+
+       <div class="mb-3 row" *ngIf="Visibles.Ministry">
+         <label for="Ministry" class="col-sm-4 col-form-label">جهة حكومية</label>
+         <div class="col-sm-8">
+           <select formControlName="Ministry" class="form-control col-6">
+             <option [ngValue]="null" disabled>اختر</option>
+             <option *ngFor="let ministry of ministries" [ngValue]="ministry.id">{{ministry.name}}</option>
+           </select>
+
+           <span class="help-block" *ngIf="formsErrors.Ministry">
+             {{formsErrors.Ministry}}
+           </span>
+         </div>
+       </div>
+
+       <div class="mb-3 row" *ngIf="Visibles.Bank">
+         <label for="Bank" class="col-sm-4 col-form-label"> جهة مصرفية</label>
+         <div class="col-sm-8">
+           <select formControlName="Bank" class="form-control col-6">
+             <option [ngValue]="null" disabled>اختر</option>
+             <option *ngFor="let bank of Banks" [ngValue]="bank.id">{{bank.name}}</option>
+           </select>
+           <span class="help-block" *ngIf="formsErrors.Bank">
+             {{formsErrors.Bank}}
+           </span>
+         </div>
+       </div>
+       <div class="mb-3 row" *ngIf="Visibles.job_description">
+         <label for="job_description" class="col-sm-4 col-form-label">الوصف الوضيفي</label>
+         <div class="col-sm-8">
+           <input type="text" class="form-control" formControlName="job_description" id="job_description"
+             (blur)=logValidationErrors(editvisitor)>
+           <span class="help-block" *ngIf="formsErrors.job_description">
+             {{formsErrors.job_description}}
+           </span>
+         </div>
+       </div>
+
+
+
+
+       <div class="mb-3 row" *ngIf="Visibles.mobile">
+         <label for="mobile" class="col-sm-4 col-form-label">رقم الجوال</label>
+         <div class="col-sm-8">
+           <input type="text" class="form-control" formControlName="mobile" id="mobile"
+             (blur)=logValidationErrors(editvisitor)>
+           <span class="help-block" *ngIf="formsErrors.mobile">
+             {{formsErrors.mobile}}
+           </span>
+         </div>
+       </div>
+
+       <div class="mb-3 row" *ngIf="Visibles.fromDate">
+         <label for="fromDate" class="col-sm-4 col-form-label">تاريخ الزيارة </label>
+         <div class="col-sm-8">
+           <input type="date" class="form-control" formControlName="fromDate" [(ngModel)]="fromDate" id="fromDate"
+             (blur)=logValidationErrors(editvisitor)>
+           <span class="help-block" *ngIf="formsErrors.fromDate">
+             {{formsErrors.fromDate}}
+           </span>
+         </div>
+       </div>
+
+       <div class="mb-3 row" *ngIf="Visibles.h_Name">
+         <label for="h_Name" class="col-sm-4 col-form-label">أسم الشخص المستضيف</label>
+         <div class="col-sm-8">
+           <input type="text" class="form-control" formControlName="h_Name" id="h_Name"
+             (blur)=logValidationErrors(editvisitor)>
+           <span class="help-block" *ngIf="formsErrors.h_Name">
+             {{formsErrors.h_Name}}
+           </span>
+         </div>
+       </div>
+
+       <div class="mb-3 row" *ngIf="Visibles.Directorate">
+         <label for="Directorate" class="col-sm-4 col-form-label">الدائرة المستضيفة</label>
+         <div class="col-sm-8">
+           <select formControlName="Directorate" class="form-control col-6"
+             (change)="onChangeDirectorate($event.target.value)">
+             <option [ngValue]="null" disabled>اختر</option>
+             <option *ngFor="let directorate of Directorates" [ngValue]="directorate.id" [value]="directorate.id">
+               {{directorate.name}}</option>
+           </select>
+
+           <span class="help-block" *ngIf="formsErrors.Directorate">
+             {{formsErrors.Directorate}}
+           </span>
+         </div>
+       </div>
+       <div class="mb-3 row" *ngIf="Visibles.Department">
+         <label for="Department" class="col-sm-4 col-form-label">القسم المستضيف</label>
+         <div class="col-sm-8">
+           <select formControlName="Department" class="form-control col-6">
+             <option [ngValue]="null" disabled>اختر</option>
+             <option *ngFor="let department of fDepartments" [ngValue]="department.id">{{department.name}}</option>
+           </select>
+
+           <span class="help-block" *ngIf="formsErrors.Department">
+             {{formsErrors.Department}}
+           </span>
+         </div>
+       </div>
+
+        
+       <div class="mb-3 row">
+         <label for="note" class="col-sm-4 col-form-label">الملاحظات</label>
+         <div class="col-sm-8">
+           <textarea name="description" type="text" formControlName="note" id="note" class="form-control"
+             (blur)=logValidationErrors(editvisitor)></textarea>
+           <span class="help-block" *ngIf="formsErrors.note">
+             {{formsErrors.note}}
+           </span>
+
+
+         </div>
+       </div>
+
+
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" (click)="closeBtnClick()">Close</button>
+
+         <button type="submit" class="btn btn-primary" [disabled]="editvisitor.invalid">Save</button>
+       </div>
+     </form>
+   </div>
+ </ng-template>

@@ -1,0 +1,61 @@
+<div class="card poll-widget">
+    <div class="card-body">
+        <h4 class="card-title">Result of Poll</h4>
+        <h5 class="card-subtitle">Here is the result for the latest poll</h5>
+        <h5 class="font-medium mt-4 text-dark">What is your mobile app usage daily?</h5>
+        <ul class="list-style-none mt-4">
+            <li>
+                <div class="d-flex align-items-center mb-2">
+                    <div>
+                        <h6 class="mb-0 fw-bold">A
+                            <span class="fw-light">30 Minutes</span>
+                        </h6>
+                    </div>
+                    <div class="ms-auto">
+                        <h6 class="mb-0 fw-bold">55%</h6>
+                    </div>
+                </div>
+                <ngb-progressbar type="info" [value]="25"></ngb-progressbar>
+            </li>
+            <li class="mt-4">
+                <div class="d-flex align-items-center mb-2">
+                    <div>
+                        <h6 class="mb-0 fw-bold">B
+                            <span class="fw-light">More than 30 minutes</span>
+                        </h6>
+                    </div>
+                    <div class="ms-auto">
+                        <h6 class="mb-0 fw-bold">20%</h6>
+                    </div>
+                </div>
+                <ngb-progressbar type="cyan" [value]="25"></ngb-progressbar>
+            </li>
+            <li class="mt-4">
+                <div class="d-flex align-items-center mb-2">
+                    <div>
+                        <h6 class="mb-0 fw-bold">C
+                            <span class="fw-light">1 Hour</span>
+                        </h6>
+                    </div>
+                    <div class="ms-auto">
+                        <h6 class="mb-0 fw-bold">15%</h6>
+                    </div>
+                </div>
+                <ngb-progressbar type="success" [value]="25"></ngb-progressbar>
+            </li>
+            <li class="mt-4">
+                <div class="d-flex align-items-center mb-2">
+                    <div>
+                        <h6 class="mb-0 fw-bold">D
+                            <span class="fw-light">More than 1 hour</span>
+                        </h6>
+                    </div>
+                    <div class="ms-auto">
+                        <h6 class="mb-0 fw-bold">10%</h6>
+                    </div>
+                </div>
+                <ngb-progressbar type="danger" [value]="25"></ngb-progressbar>
+            </li>
+        </ul>
+    </div>
+</div>

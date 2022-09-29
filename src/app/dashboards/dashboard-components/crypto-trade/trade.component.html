@@ -1,0 +1,294 @@
+<div class="row">
+    <!-- column -->
+    <div class="col-sm-12 col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <!-- title -->
+                <div class="d-md-flex align-items-center">
+                    <div>
+                        <h4 class="card-title">Trade History</h4>
+                        <h5 class="card-subtitle">History as you Like</h5>
+                    </div>
+                    <div class="ms-auto d-flex align-items-center">
+                        <div class="dl">
+                            <select class="form-select">
+                                <option value="0" selected>March</option>
+                                <option value="1">April</option>
+                                <option value="2">May</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+                  <li [ngbNavItem]="1">
+                    <a ngbNavLink>Market</a>
+                    <ng-template ngbNavContent>
+                      <div class="table-responsive mt-3">
+                                <table class="table align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-top-0">Price</th>
+                                            <th class="border-top-0">Amount</th>
+                                            <th class="border-top-0">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <span class="text-success">$12948.89</span>
+                                            </td>
+                                            <td>
+                                                <i class="cc BTC me-2"></i>
+                                                <span class="font-medium">0.123</span>
+                                            </td>
+                                            <td>12:45:09</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="text-danger">$23135.78</span>
+                                            </td>
+                                            <td>
+                                                <i class="cc XRP me-2"></i>
+                                                <span class="font-medium">1.123</span>
+                                            </td>
+                                            <td>12:43:09</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="text-success">$43567.98</span>
+                                            </td>
+                                            <td>
+                                                <i class="cc ETH me-2 blue-text"></i>
+                                                <span class="font-medium">0.123</span>
+                                            </td>
+                                            <td>12:45:09</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="text-success">$12948.89</span>
+                                            </td>
+                                            <td>
+                                                <i class="cc BTC me-2"></i>
+                                                <span class="font-medium">0.123</span>
+                                            </td>
+                                            <td>12:45:09</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="text-danger">$23135.78</span>
+                                            </td>
+                                            <td>
+                                                <i class="cc XRP me-2"></i>
+                                                <span class="font-medium">1.123</span>
+                                            </td>
+                                            <td>12:43:09</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="text-success">$43567.98</span>
+                                            </td>
+                                            <td>
+                                                <i class="cc ETH me-2 blue-text"></i>
+                                                <span class="font-medium">0.123</span>
+                                            </td>
+                                            <td>12:45:09</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                    </ng-template>
+                  </li>
+                  <li [ngbNavItem]="2">
+                    <a ngbNavLink>Sell History</a>
+                    <ng-template ngbNavContent>
+                      <div class="table-responsive mt-3">
+                                <table class="table align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-top-0">Price</th>
+                                            <th class="border-top-0">Amount</th>
+                                            <th class="border-top-0">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <span class="text-success">$43567.98</span>
+                                            </td>
+                                            <td>
+                                                <i class="cc ETH me-2"></i>
+                                                <span class="font-medium">0.123</span>
+                                            </td>
+                                            <td>12:45:09</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="text-success">$12948.89</span>
+                                            </td>
+                                            <td>
+                                                <i class="cc BTC me-2"></i>
+                                                <span class="font-medium">0.123</span>
+                                            </td>
+                                            <td>12:45:09</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="text-success">$12948.89</span>
+                                            </td>
+                                            <td>
+                                                <i class="cc BTC me-2"></i>
+                                                <span class="font-medium">0.123</span>
+                                            </td>
+                                            <td>12:45:09</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="text-danger">$23135.78</span>
+                                            </td>
+                                            <td>
+                                                <i class="cc XRP me-2"></i>
+                                                <span class="font-medium">1.123</span>
+                                            </td>
+                                            <td>12:43:09</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="text-danger">$23135.78</span>
+                                            </td>
+                                            <td>
+                                                <i class="cc XRP me-2"></i>
+                                                <span class="font-medium">1.123</span>
+                                            </td>
+                                            <td>12:43:09</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="text-success">$43567.98</span>
+                                            </td>
+                                            <td>
+                                                <i class="cc ETH me-2"></i>
+                                                <span class="font-medium">0.123</span>
+                                            </td>
+                                            <td>12:45:09</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                    </ng-template>
+                  </li>
+                </ul>
+
+                <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- column -->
+    <div class="col-sm-12 col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <!-- title -->
+                <div class="d-md-flex align-items-center">
+                    <div>
+                        <h4 class="card-title">Market History</h4>
+                        <h5 class="card-subtitle">History as you Like</h5>
+                    </div>
+                    <div class="ms-auto d-flex align-items-center">
+                        <div class="dl">
+                            <select class="form-select">
+                                <option value="0" selected>March</option>
+                                <option value="1">April</option>
+                                <option value="2">May</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive mt-2">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th class="border-top-0">Price</th>
+                                        <th class="border-top-0">Amount</th>
+                                        <th class="border-top-0">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <span class="text-success">$43567.98</span>
+                                        </td>
+                                        <td>
+                                            <i class="cc ETH me-2"></i>
+                                            <span class="font-medium">0.123</span>
+                                        </td>
+                                        <td>12:45:09</td>
+                                    </tr>
+                                    <tr class="table-success">
+                                        <td>
+                                            <span class="text-success">$12948.89</span>
+                                        </td>
+                                        <td>
+                                            <i class="cc BTC me-2"></i>
+                                            <span class="font-medium">0.123</span>
+                                        </td>
+                                        <td>12:45:09</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="text-success">$12948.89</span>
+                                        </td>
+                                        <td>
+                                            <i class="cc BTC me-2"></i>
+                                            <span class="font-medium">0.123</span>
+                                        </td>
+                                        <td>12:45:09</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="text-danger">$23135.78</span>
+                                        </td>
+                                        <td>
+                                            <i class="cc XRP me-2"></i>
+                                            <span class="font-medium">1.123</span>
+                                        </td>
+                                        <td>12:43:09</td>
+                                    </tr>
+                                    <tr class="table-danger">
+                                        <td>
+                                            <span class="text-danger">$23135.78</span>
+                                        </td>
+                                        <td>
+                                            <i class="cc XRP me-2"></i>
+                                            <span class="font-medium">1.123</span>
+                                        </td>
+                                        <td>12:43:09</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="text-success">$43567.98</span>
+                                        </td>
+                                        <td>
+                                            <i class="cc ETH me-2"></i>
+                                            <span class="font-medium">0.123</span>
+                                        </td>
+                                        <td>12:45:09</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="text-success">$43567.98</span>
+                                        </td>
+                                        <td>
+                                            <i class="cc ETH me-2"></i>
+                                            <span class="font-medium">0.123</span>
+                                        </td>
+                                        <td>12:45:09</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- column -->
+</div>

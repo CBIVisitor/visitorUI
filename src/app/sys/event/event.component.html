@@ -1,0 +1,147 @@
+<p>event works!</p>
+
+
+<div class="row">
+  <div class="col-12">
+    <div class="card card-body">
+      <h4 class="card-title">قائمة الدورات</h4>
+      <h5 class="card-subtitle">قائمة بكل الدورات</h5>
+      <div class="d-flex mb-3 mt-3">
+        <input type="text" class="form-control w-25" placeholder="البحث عن الاسم" [(ngModel)]='searchTerm'>
+        <button class="btn btn-primary ms-auto" (click)="openModal(editEventModal, null)">إضافة جديد</button>
+      </div>
+      <div class="table-responsive table-bordered" *ngIf="filterArray.length>0">
+
+
+        <table class="table table-striped mb-0 no-wrap align-middle">
+          <thead>
+            <tr>
+              <th class="text-center" scope="col">#</th>
+              <th scope="col">إسم الدورة</th>
+              <th scope="col">تبدأ في</th>
+              <th scope="col">تنتهي في</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr *ngFor="let event of filterArray | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+
+              <td class="text-center">
+                {{event.id}}
+              </td>
+
+              <td>
+                <div class="d-flex align-items-center">
+
+                  <div class="ms-3">
+                    <p class="font-medium mb-0">{{ event.name }}</p>
+
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex align-items-center">
+
+                  <div class="ms-3">
+                    <p class="font-medium mb-0">{{ event.fromDate |date:'longDate'}}</p>
+
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex align-items-center">
+
+                  <div class="ms-3">
+                    <p class="font-medium mb-0">{{ event.toDate |date:'longDate'}}</p>
+
+                  </div>
+                </div>
+              </td>
+              <td>
+                <a href="javascript: void(0);" (click)="openModal(editEventModal, event)" class="link me-2"
+                  placement="top" ngbTooltip="Edit">
+                  <i-feather name="edit-2" class="feather-sm"></i-feather>
+                </a>
+                <a href="javascript: void(0);" class="link" (click)="deleteEvent(event.id)" placement="top"
+                  ngbTooltip="Delete">
+                  <i-feather name="trash-2" class="feather-sm"></i-feather>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+ 
+      <div class="d-flex justify-content-center mt-5" *ngIf="filterArray.length>0">
+        <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="EventList.length"></ngb-pagination>
+      </div>
+    <div class="d-flex justify-content-center mt-5" *ngIf="filterArray.length==0">
+      <h3>لا توجد بيانات</h3>
+    </div>
+    </div>
+      
+  </div>
+</div>
+
+
+<ng-template #editEventModal let-modal>
+
+  <div class="modal-header">
+
+    <h5 class="modal-title" id="editEventLabel">معلومات الدورة </h5>
+
+    <button type="button" class="close" (click)="closeBtnClick()" aria-label="غلق"> غلق
+    </button>
+
+  </div>
+
+  <div class="modal-body">
+
+    <form [formGroup]="editEvent" (ngSubmit)="onSubmit2()">
+
+      <div class="mb-3 row">
+        <label for="name" class="col-sm-4 col-form-label"> الاسم الدورة</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" formControlName="name" id="name"
+            (blur)=logValidationErrors(editEvent)>
+          <span class="help-block" *ngIf="formsErrors.fullname">
+            {{formsErrors.name}}
+          </span>
+        </div>
+      </div>
+
+
+
+      <div class="mb-3 row">
+        <label for="fromDate" class="col-sm-4 col-form-label">تاريخ الدورة من </label>
+        <div class="col-sm-8">
+          <input type="date" class="form-control" formControlName="fromDate" [(ngModel)]="fromDate" id="fromDate"
+            (blur)=logValidationErrors(editEvent)>
+          <span class="help-block" *ngIf="formsErrors.fromDate">
+            {{formsErrors.fromDate}}
+          </span>
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="toDate" class="col-sm-4 col-form-label"> تنتهي الدورة في </label>
+        <div class="col-sm-8">
+          <input type="date" class="form-control" formControlName="toDate" [(ngModel)]="toDate" id="toDate"
+            (blur)=logValidationErrors(editEvent)>
+          <span class="help-block" *ngIf="formsErrors.toDate">
+            {{formsErrors.toDate}}
+          </span>
+        </div>
+      </div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeBtnClick()">Close</button>
+
+        <button type="submit" class="btn btn-primary" [disabled]="editEvent.invalid">Save</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

@@ -1,0 +1,113 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">ترشيح البيانات</h4>
+      </div>
+      <hr class="mt-0">
+      <form class="form-horizontal r-separator">
+        <div class="card-body">
+          <div class="form-group row py-3">
+            <label for="fromDate" class="col-sm-3 text-end control-label col-form-label">من تاريخ</label>
+            <div class="col-sm-6">
+              <input type="date" class="form-control" id="fromDate" [(ngModel)]="fromDate" placeholder="يوم/شهر/سنة"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+          <div class="form-group row py-3">
+            <label for="toDate" class="col-sm-3 text-end control-label col-form-label">الى تاريخ</label>
+            <div class="col-sm-6">
+              <input type="date" class="form-control" id="toDate" [(ngModel)]="toDate" placeholder="يوم/شهر/سنة"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+          <div class="form-group row py-3">
+            <label for="Profile" class="col-sm-3 text-end control-label col-form-label">نوع الزائر</label>
+            <div class="col-sm-6">
+              <ng-multiselect-dropdown [placeholder]="'تحديد نوع الزائر'" [data]="profiles" [(ngModel)]="selectedItems"
+                [settings]="dropdownSettings" name="Profile">
+              </ng-multiselect-dropdown>
+            </div>
+          </div>
+        </div>
+        <div class="card-body bg-light">
+          <div class="form-group mb-0 text-end button-group">
+            <button type="submit" (click)="OnSebmit()" class="btn btn-info waves-effect waves-light">إضهار
+              النتائج</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+
+  <div class="card">
+    <div class="card-body">
+      <div class="d-md-flex align-items-center" *ngIf="logz.length>0">
+        <div>
+          <h4 class="card-title">قائمة النتائج</h4>
+          <h5 class="card-subtitle"></h5>
+        </div>
+        <div class="ms-auto d-flex no-block align-items-center">
+          <div class="dl"> 
+
+
+ 
+               
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive" *ngIf="logz.length>0">
+        <table class="table no-wrap align-middle" id="tblData" name="tblData">
+          <thead>
+            <tr class="border-0">
+              <th class="border-0">الاسم الكامل</th>
+              <th class="border-0">نوع الزائر</th>
+              <th class="border-0">الوصف الوظيفي</th>
+              <th class="border-0">الجهة</th>
+              <th class="border-0">الجنس</th>
+              <th class="border-0">أسم المستضيف</th>
+              <th class="border-0">القسم المستضيف</th>
+              <th class="border-0">الدائرة المستضيفة</th>
+              <th class="border-0">التاريخ</th>
+              <th class="border-0">البوابة</th>
+              <th class="border-0">دخول البوابة الرئيسية</th>
+              <th class="border-0">دخول البوابة الثانوية</th>
+              <th class="border-0">خروج البوابة الثانوية</th>
+              <th class="border-0">خروج البوابة الرئيسية</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let visitor of logz | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+
+              <td> {{visitor?.Visitor?.fullname}} </td>
+              <td> {{visitor?.Visitor?.Profile.bio}} </td>
+              <td> {{visitor?.Visitor?.job_description}} </td>
+              <td> {{visitor?.Visitor?.destination}} </td>
+              <td> {{visitor?.Visitor?.Gender?.name}} </td>
+
+              <td class="blue-grey-text  text-darken-4 font-medium">{{visitor?.Visitor?.h_Name}}</td>
+              <td class="blue-grey-text  text-darken-4 font-medium">{{visitor?.Visitor?.h_Department}}</td>
+              <td class="blue-grey-text  text-darken-4 font-medium">{{visitor?.Visitor?.h_Directorate}}</td>
+              <td class="blue-grey-text  text-darken-4 font-medium">{{visitor?.day | date: 'yyyy-MM-dd'}}</td>
+              <td class="blue-grey-text  text-darken-4 font-medium">{{visitor?.door?.name }}</td>
+              <td class="blue-grey-text  text-darken-4 font-medium">{{visitor?.mainDoorIn |  date:'mediumTime'}}</td>
+              <td class="blue-grey-text  text-darken-4 font-medium">{{visitor?.subDoorIn |  date:'mediumTime'}}</td>
+              <td class="blue-grey-text  text-darken-4 font-medium">{{visitor?.subDoorOut |  date:'mediumTime'}}</td>
+              <td class="blue-grey-text  text-darken-4 font-medium">{{visitor?.mainDoorOut |  date:'mediumTime'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+  <div class="d-flex justify-content-center mt-5" *ngIf="logz.length==0">
+    <h3>لا توجد بيانات</h3>
+  </div>
+
+    </div>
+  </div>
+</div>

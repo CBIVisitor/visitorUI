@@ -1,0 +1,227 @@
+ <!-- Mobile toggle button -->
+ <a [ngClass]="showSidebar ? 'ti-close' : 'ti-menu'" class="btn btn-success show-left-part d-block d-lg-none"
+   href="javascript:void(0)" (click)="mobileSidebar()"></a>
+
+ <div class="main-part" style="height: calc(100vh - 175px)">
+   <!-- left part -->
+   <div class="left-part bg-white fixed-left-part border-end" [ngClass]="{ 'show-panel': showSidebar }">
+     <div class="position-relative" style="height: 100%">
+       <div class="ps-3 pe-4 py-3 d-flex align-items-center mt-1 border-bottom">
+         <div class="card-body">
+
+         </div>
+       </div>
+       <div class="p-3">
+         <div class="mb-3 mt-4">
+           <input type="text" class="form-control" placeholder="بحث" [(ngModel)]="searchTerm" />
+         </div>
+       </div>
+       <!-- listing filter -->  
+       <ul class="mailbox list-style-none"> 
+         <li>
+           <div class="message-center" style="height: calc(100vh - 450px)" [perfectScrollbar]="config">
+
+           </div>
+         </li>
+       </ul>
+     </div>
+   </div>
+   <!-- right part -->
+   <div class="right-part bg-white">
+     <div class="position-relative" style="height: 100%">
+       <div class="d-md-flex align-items-center p-4 border-bottom mail-pagination">
+         <h4 class="card-title mb-0">
+
+         </h4>
+         <div class="ms-auto mt-3 mt-md-0">
+           <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="filjobs.length">
+           </ngb-pagination>
+         </div>
+       </div>
+       <!-- listing of jobs -->
+       <div class="position-relative" style="height: calc(100vh - 260px)" [perfectScrollbar]="config">
+         <div class="card">
+           <div class="card-body">
+             <div class="table-responsive">
+               <table class="table align-middle">
+                 <thead>
+                   <tr>
+                     <th class="border-top-0">قائمة الزائرين الحاليين</th>
+                     <th class="text-center border-top-0" *ngIf="!MainPage">البوابة الرئيسية</th>
+                     <th class="text-center border-top-0" *ngIf="MainPage">البوابة الثانوية</th>
+                     <th class="text-center border-top-0">الدخول</th>
+                     <th class="text-center border-top-0" >الخروج </th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                   <tr *ngFor=" let job of filjobs | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize ">
+                     <td>
+                       <div class="d-flex align-items-center">
+                         <div class="me-2">
+                           <img src="assets/images/users/user4.jpg" alt="user" class="rounded-circle" width="45" />
+                         </div>
+                         <div class="">
+                           <h4 class="mb-0 fs-4">{{job?.Visitor?.fullname}}</h4>
+                           <span>{{job?.Visitor?.Profile?.bio}}</span>
+                         </div>
+                       </div>
+                     </td>
+                     <td class="text-center" *ngIf="MainPage">
+                       <i class="fa fa-circle text-orange" *ngIf="!job?.subDoorOut"> {{job?.door.name}}</i>
+                       <i class="fa fa-circle text-success" *ngIf="job?.subDoorOut"> {{job?.door.name}}</i>
+                     </td>
+                     <td class="text-center" *ngIf="!MainPage">
+                       <i class="fa fa-circle text-orange" *ngIf="!job?.mainDoorIn"> </i>
+                       <i class="fa fa-circle text-success" *ngIf="job?.mainDoorIn">  </i>
+                     </td>
+
+                     <td class="text-center" *ngIf="MainPage">
+                       <button type="button" *ngIf="!job?.mainDoorIn" (click)="setMainDoorIn(job?.id)"
+                         class="btn btn-circle rounded-circle btn-primary">
+                         <i class="fa fa-check"></i>
+                       </button>
+                       <div *ngIf="job?.mainDoorIn">
+                         <span class="badge badge-pill bg-success  "
+                           ngbTooltip="{{job?.mainDoorIn  |  date:'mediumTime' }}">
+                           {{job?.mainDoorIn | timeago:live}}</span></div>
+                     </td>
+                     <td class="text-center" *ngIf="!MainPage">
+                       <button type="button" *ngIf="!job?.subDoorIn" (click)="setSubDoorIn(job?.id)"
+                         class="btn btn-circle rounded-circle btn-success">
+                         <i class="fa fa-check"></i>
+                       </button>
+                       <div *ngIf="job?.subDoorIn">
+                         <span class="badge badge-pill bg-success  "
+                           ngbTooltip="{{job?.mainDoorIn  |  date:'mediumTime' }}">
+                           {{job?.subDoorIn | timeago:live}}</span></div>
+                     </td>
+                     <td class="text-center" *ngIf="MainPage">
+                       <button type="button" *ngIf="!job?.mainDoorOut" (click)="setMainDoorOut(job?.id)"
+                         class="btn btn-circle rounded-circle btn-danger">
+                         <i class="fa fa-check"></i>
+                       </button>
+                       <div *ngIf="job?.mainDoorOut">
+                         <span class="badge badge-pill bg-danger  " 
+                         ngbTooltip="{{job?.mainDoorIn  |  date:'mediumTime' }}">
+                           {{job?.mainDoorOut | timeago:live}}
+                         </span>
+                       </div>
+                     </td>
+                     <td class="text-center" *ngIf="!MainPage">
+                       <button type="button" *ngIf="!job?.subDoorOut" (click)="setSubDoorOut(job?.id)"
+                         class="btn btn-circle rounded-circle btn-danger">
+                         <i class="fa fa-check"></i>
+                       </button>
+                       <div *ngIf="job?.subDoorOut">
+                         <span class="badge badge-pill bg-danger  "
+                         ngbTooltip="{{job?.mainDoorIn  |  date:'mediumTime' }}">
+                           {{job?.subDoorOut | timeago:live}}
+                         </span>
+                       </div>
+                     </td>
+                 </tbody>
+               </table>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+
+ <ng-template #AddJobItem let-modal>
+   <div class="modal-header">
+     <h5 class="modal-title">Add Jobs</h5>
+     <button type="button" class="close" (click)="closeBtnClick()" aria-label="Close">
+       <span aria-hidden="true">&times;</span>
+     </button>
+   </div>
+
+   <div class="modal-body">
+     <form [formGroup]="jobAdd" (ngSubmit)="onSubmit()">
+       <div class="form-group row">
+         <label for="name" class="col-sm-4 col-form-label">Job Image</label>
+         <div class="col-sm-8">
+           <input type="file" style="display: none" (change)="preview(filevar.files)" #filevar />
+           <img [src]="selectedImage" class="rounded-circle image cursor-pointer" alt="" height="100px" width="100px"
+             (click)="filevar.click()" />
+         </div>
+       </div>
+
+       <div class="form-group row">
+         <label class="col-sm-4 col-form-label">Job Title</label>
+         <div class="col-sm-8">
+           <input type="text" class="form-control" formControlName="Title" />
+         </div>
+       </div>
+
+       <div class="form-group row">
+         <label class="col-sm-4 col-form-label">Job Loction</label>
+         <div class="col-sm-8">
+           <select class="form-control" formControlName="Location">
+             <option value="" disabled>Choose location</option>
+             <option *ngFor="let loc of location" [ngValue]="loc">
+               {{ loc }}
+             </option>
+           </select>
+
+           <!-- <input type="text" class="form-control" formControlName="Location"> -->
+         </div>
+       </div>
+
+       <div class="form-group row">
+         <label class="col-sm-4 col-form-label">Description</label>
+         <div class="col-sm-8">
+           <input type="email" class="form-control" formControlName="Description" />
+         </div>
+       </div>
+
+       <div class="form-group row">
+         <label class="col-sm-4 col-form-label">Qualification</label>
+         <div class="col-sm-8">
+           <textarea class="form-control" formControlName="Qualification" rows="4" cols="50">
+          </textarea>
+         </div>
+       </div>
+
+       <div class="form-group row">
+         <label class="col-sm-4 col-form-label">Job Type</label>
+         <div class="col-sm-8">
+           <select class="form-control" formControlName="JobType">
+             <option value="" disabled>Choose type of job</option>
+             <option *ngFor="let jt of jobtype" [ngValue]="jt">{{ jt }}</option>
+           </select>
+         </div>
+       </div>
+
+       <div class="form-group row">
+         <label class="col-sm-4 col-form-label">Job In</label>
+         <div class="col-sm-8">
+           <select class="form-control" formControlName="Nature">
+             <option value="" disabled>Choose job in</option>
+             <option *ngFor="let ji of jobin" [ngValue]="ji">{{ ji }}</option>
+           </select>
+
+           <!-- <input type="text" class="form-control" formControlName="Nature"> -->
+         </div>
+       </div>
+
+       <div class="form-group row">
+         <label class="col-sm-4 col-form-label">Job Icon</label>
+         <div class="col-sm-8">
+           <input type="text" class="form-control" formControlName="Icon" />
+         </div>
+       </div>
+
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" (click)="closeBtnClick()">
+           Close
+         </button>
+
+         <button type="submit" class="btn btn-primary" [disabled]="jobAdd.invalid">
+           Save
+         </button>
+       </div>
+     </form>
+   </div>
+ </ng-template>

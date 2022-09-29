@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-center mb-4">
+            <div>
+                <h1 class="fw-bold mb-0">$6,890.68</h1>
+                <span>Overview of email campaigns</span>
+            </div>
+            <div class="ms-auto">
+                <i class="mdi mdi-wallet text-info display-5"></i>
+            </div>
+        </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non pharetra ligula, sit amet laoreet
+            arcu.Integer.</p>
+        <a href="javascript: void(0)" class="fw-bold">Last Month Summary</a>
+    </div>
+    <div class="mt-4 pt-3 d-flex flex-column">
+        <apx-chart [series]="COChartOptions.series" [chart]="COChartOptions.chart"
+            [dataLabels]="COChartOptions.dataLabels" [legend]="COChartOptions.legends" [colors]="COChartOptions.colors"
+            [stroke]="COChartOptions.stroke" [labels]="COChartOptions.labels" [tooltip]="COChartOptions.tooltip"
+            [markers]="COChartOptions.markers"></apx-chart>
+    </div>
+</div>

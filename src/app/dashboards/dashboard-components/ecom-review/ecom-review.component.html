@@ -1,0 +1,63 @@
+<div class="card">
+    <div class="row">
+        <div class="col-sm-12 col-lg-4">
+            <div class="card-body">
+                <h4 class="card-title">Reviews</h4>
+                <h5 class="card-subtitle">Overview of Review</h5>
+                <h2 class="font-medium mt-4 pt-3 mb-0">25426</h2>
+                <span class="text-muted">This month we got 346 New Reviews</span>
+                <div class="image-box mt-4 mb-4">
+                    <a href="#" class="me-2" placement="top" ngbTooltip="Simmons">
+                        <img src="assets/images/users/user1.jpg" class="rounded-circle" width="45" alt="user">
+                    </a>
+                    <a href="#" class="me-2" placement="top" ngbTooltip="Fitz">
+                        <img src="assets/images/users/user2.jpg" class="rounded-circle" width="45" alt="user">
+                    </a>
+                    <a href="#" class="me-2" placement="top" ngbTooltip="Phil">
+                        <img src="assets/images/users/user3.jpg" class="rounded-circle" width="45" alt="user">
+                    </a>
+                    <a href="#" class="me-2" placement="top" ngbTooltip="Melinda">
+                        <img src="assets/images/users/user4.jpg" class="rounded-circle" width="45" alt="user">
+                    </a>
+                </div>
+                <a href="javascript:void(0)" class="btn btn-lg btn-info waves-effect waves-light">Checkout All Reviews</a>
+            </div>
+        </div>
+        <div class="col-sm-12 col-lg-8 border-start">
+            <div class="card-body">
+                <ul class="list-style-none">
+                    <li class="mt-4">
+                        <div class="d-flex align-items-center">
+                            <i class="mdi mdi-emoticon-happy display-5 text-muted"></i>
+                            <div class="ms-2">
+                                <h5 class="mb-0">Positive Reviews</h5>
+                                <span class="text-muted">25547 Reviews</span>
+                            </div>
+                        </div>
+                        <ngb-progressbar type="success" [value]="47"></ngb-progressbar>
+                    </li>
+                    <li class="mt-4 pt-3">
+                        <div class="d-flex align-items-center">
+                            <i class="mdi mdi-emoticon-sad display-5 text-muted"></i>
+                            <div class="ms-2">
+                                <h5 class="mb-0">Negative Reviews</h5>
+                                <span class="text-muted">5547 Reviews</span>
+                            </div>
+                        </div>
+                        <ngb-progressbar type="orange" [value]="33"></ngb-progressbar>
+                    </li>
+                    <li class="mt-4 pt-3 mb-4 pb-3">
+                        <div class="d-flex align-items-center">
+                            <i class="mdi mdi-emoticon-neutral display-5 text-muted"></i>
+                            <div class="ms-2">
+                                <h5 class="mb-0">Neutral Reviews</h5>
+                                <span class="text-muted">547 Reviews</span>
+                            </div>
+                        </div>
+                        <ngb-progressbar type="info" [value]="20"></ngb-progressbar>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

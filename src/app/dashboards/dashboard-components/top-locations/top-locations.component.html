@@ -1,0 +1,65 @@
+<!-- ============================================================== -->
+<!-- Locations -->
+<!-- ============================================================== -->
+<div class="row">
+    <!-- column -->
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Top Locations</h4>
+                <h5 class="card-subtitle">Email Campaigns</h5>
+                <div class="row">
+                    <!-- column -->
+                    <div class="col-sm-12 col-md-5 col-lg-7">
+                        <div class="d-flex flex-column w-100">
+                            <apx-chart [series]="ToplocationsChartOptions.series"
+                                [chart]="ToplocationsChartOptions.chart"
+                                [dataLabels]="ToplocationsChartOptions.dataLabels"
+                                [plotOptions]="ToplocationsChartOptions.plotOptions"
+                                [xaxis]="ToplocationsChartOptions.xaxis" [stroke]="ToplocationsChartOptions.stroke"
+                                [fill]="ToplocationsChartOptions.fill" [yaxis]="ToplocationsChartOptions.yaxis"
+                                [title]="ToplocationsChartOptions.title" [tooltip]="ToplocationsChartOptions.tooltip"
+                                [legend]="ToplocationsChartOptions.legend"></apx-chart>
+                        </div>
+                    </div>
+                    <!-- column -->
+                    <div class="col-sm-12 col-md-6 col-lg-4 ms-auto">
+                        <ul class="list-style-none pe-3 country-list" [perfectScrollbar]="config">
+                            <li class="d-flex border-bottom pt-3 pb-4 align-items-center">
+                                <i class="flag-icon flag-icon-it me-3" title="it" id="it"></i>
+                                <span class="text-info">Italy</span>
+                                <h5 class="ms-auto mb-0">24</h5>
+                            </li>
+                            <li class="d-flex border-bottom pt-3 pb-4 align-items-center">
+                                <i class="flag-icon flag-icon-us me-3" title="us" id="us"></i>
+                                <span class="text-info">USA</span>
+                                <h5 class="ms-auto mb-0">18</h5>
+                            </li>
+                            <li class="d-flex border-bottom pt-3 pb-4 align-items-center">
+                                <i class="flag-icon flag-icon-de me-3" title="de" id="de"></i>
+                                <span class="text-info">Germany</span>
+                                <h5 class="ms-auto mb-0">14</h5>
+                            </li>
+                            <li class="d-flex border-bottom pt-3 pb-4 align-items-center">
+                                <i class="flag-icon flag-icon-in me-3" title="in" id="in"></i>
+                                <span class="text-info">India</span>
+                                <h5 class="ms-auto mb-0">15</h5>
+                            </li>
+                            <li class="d-flex border-bottom pt-3 pb-4 align-items-center">
+                                <i class="flag-icon flag-icon-fr me-3" title="in" id="in"></i>
+                                <span class="text-info">France</span>
+                                <h5 class="ms-auto mb-0">09</h5>
+                            </li>
+                            <li class="d-flex border-bottom pt-3 pb-4 align-items-center">
+                                <i class="flag-icon flag-icon-es me-3" title="es" id="es"></i>
+                                <span class="text-info">Spain</span>
+                                <h5 class="ms-auto mb-0">15</h5>
+                            </li>
+                        </ul>
+                        <a href="#" class="btn btn-info mt-2">View Full Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="card w-100">
+    <div class="card-body">
+        <h4 class="card-title">Top Sale Locations</h4>
+        <h5 class="card-subtitle"></h5>
+        <div class="row">
+            <!-- column -->
+            <div class="col-sm-12 col-md-6 col-lg-8">
+                <div class="mt-4 d-flex flex-column">
+                    <apx-chart [series]="saleslocationchartOptions.series" [chart]="saleslocationchartOptions.chart"
+                        [dataLabels]="saleslocationchartOptions.dataLabels"
+                        [plotOptions]="saleslocationchartOptions.plotOptions" [yaxis]="saleslocationchartOptions.yaxis"
+                        [legend]="saleslocationchartOptions.legend" [fill]="saleslocationchartOptions.fill"
+                        [stroke]="saleslocationchartOptions.stroke" [tooltip]="saleslocationchartOptions.tooltip"
+                        [xaxis]="saleslocationchartOptions.xaxis"></apx-chart>
+                </div>
+            </div>
+            <!-- column -->
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <ul class="list-style-none">
+                    <li class="mt-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <div>
+                                <span class="text-muted">Total</span>
+                                <h4 class="mb-0">3234
+                                    <span class="fs-4">($3,549.54)</span>
+                                </h4>
+                            </div>
+                        </div>
+                        <ngb-progressbar type="info" [value]="47"></ngb-progressbar>
+                    </li>
+                    <li class="mt-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <div>
+                                <span class="text-muted">Product Sold</span>
+                                <h4 class="mb-0">1548
+                                    <span class="fs-4">($2,044.57)</span>
+                                </h4>
+                            </div>
+                        </div>
+                        <ngb-progressbar type="cyan" [value]="47"></ngb-progressbar>
+                    </li>
+                    <li class="mt-4 mb-4 pb-3">
+                        <div class="d-flex align-items-center mb-2">
+                            <div>
+                                <span class="text-muted">Net Profit</span>
+                                <h4 class="mb-0">3158
+                                    <span class="fs-4">($3,274.79)</span>
+                                </h4>
+                            </div>
+                        </div>
+                        <ngb-progressbar type="muted" [value]="47"></ngb-progressbar>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
